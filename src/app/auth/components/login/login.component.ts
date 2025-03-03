@@ -13,7 +13,6 @@ export class LoginComponent {
   public loginForm = this.fb.group({
     identificationType: [''],
     username: [''],
-    password: [''],
   });
 
   public identificationTypeOptions = [
