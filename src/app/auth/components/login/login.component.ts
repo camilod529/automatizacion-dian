@@ -11,6 +11,7 @@ export class LoginComponent {
   private readonly fb = inject(FormBuilder);
 
   public loginForm = this.fb.group({
+    identificationType: [''],
     username: [''],
     password: [''],
   });

@@ -1,4 +1,32 @@
 <form class="form-group" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <label for="IdentificationType" class="form-label">Tipo de identificaci&oacute;n</label>
+  <select
+    class="form-control selectpicker valid"
+    data-val="true"
+    data-val-number="The field Tipo de identificación must be a number."
+    data-val-required="The Tipo de identificación field is required."
+    id="IdentificationType"
+    name="IdentificationType"
+    aria-required="true"
+    aria-invalid="false"
+    formControlName="identificationType"
+  >
+    <option value="">Seleccione el tipo de documento del Usuario Autorizado...</option>
+    <option value="10910036">Certificado Registraduría sin identificación</option>
+    <option value="10910092">Registro civil</option>
+    <option value="10910093">Tarjeta de identidad</option>
+    <option selected="selected" value="10910094">Cédula de ciudadanía</option>
+    <option value="10910095">Tarjeta de extranjería</option>
+    <option value="10910096">Cédula de extranjería</option>
+    <option value="10910097">NIT</option>
+    <option value="10910098">Pasaporte</option>
+    <option value="10910366">Tipo de documento desconocido</option>
+    <option value="10910394">Documento de identificación extranjero</option>
+    <option value="10910402">Nit de otro país</option>
+    <option value="10910403">NIUP</option>
+    <option value="10930954">PEP</option>
+    <option value="10930955">PPT</option>
+  </select>
   <div class="mb-3">
     <label for="username" class="form-label">Username</label>
     <input
