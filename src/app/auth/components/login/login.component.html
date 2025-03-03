@@ -1,4 +1,21 @@
 <form class="form-group" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <label for="IdentificationType" class="form-label">Tipo de identificaci&oacute;n</label>
+  <select
+    class="form-control selectpicker valid"
+    data-val="true"
+    data-val-number="The field Tipo de identificación must be a number."
+    data-val-required="The Tipo de identificación field is required."
+    id="IdentificationType"
+    name="IdentificationType"
+    aria-required="true"
+    aria-invalid="false"
+    formControlName="identificationType"
+  >
+    <option value="">Seleccione el tipo de documento del Usuario Autorizado...</option>
+    @for (item of identificationTypeOptions; track item.value) {
+      <option [value]="item.value">{{ item.text }}</option>
+    }
+  </select>
   <div class="mb-3">
     <label for="username" class="form-label">Username</label>
     <input
