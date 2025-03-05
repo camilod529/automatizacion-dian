@@ -1,32 +1,18 @@
-<form class="form-group" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <label for="IdentificationType" class="form-label">Tipo de identificaci&oacute;n</label>
-  <select
-    class="form-control selectpicker valid"
-    data-val="true"
-    data-val-number="The field Tipo de identificación must be a number."
-    data-val-required="The Tipo de identificación field is required."
-    id="IdentificationType"
-    name="IdentificationType"
-    aria-required="true"
-    aria-invalid="false"
-    formControlName="identificationType"
-  >
-    @for (item of identificationTypeOptions; track item.value) {
-      <option [value]="item.value">{{ item.text }}</option>
-    }
-  </select>
-  <div class="mb-3">
-    <label for="username" class="form-label">Username</label>
-    <input
-      type="text"
-      class="form-control"
-      id="username"
-      placeholder="Username"
-      name="username"
-      required
-      formControlName="username"
-    />
+<div class="login-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <h2>Iniciar Sesión</h2>
+    <div class="form-group">
+      <label for="token">Token:</label>
+      <input id="token" formControlName="token" type="text" class="form-control" />
+    </div>
+    <button type="submit" [disabled]="isLoading" class="btn btn-primary">Enviar</button>
+  </form>
+
+  <div *ngIf="isLoading" class="spinner">
+    <div class="spinner-border" role="status"></div>
   </div>
 
-  <button type="submit" class="btn btn-primary">Login</button>
-</form>
+  <div *ngIf="!isLoading && responseMessage" class="response-message">
+    <p>{{ responseMessage }}</p>
+  </div>
+</div>
