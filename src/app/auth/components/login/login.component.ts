@@ -52,13 +52,13 @@ export class LoginComponent {
       return;
     }
 
-    this.isLoading = true;
-
     const token = this.loginForm.value.token;
 
     if (!token) return;
 
     if (!token.startsWith('http://') && !token.startsWith('https://')) return;
+
+    this.isLoading = true;
 
     this.authService.sendTokenUrlToRobot(token).subscribe({
       next: response => {
