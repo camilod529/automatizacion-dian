@@ -1,17 +1,21 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { CardModule } from 'primeng/card';
-import { FormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { RippleModule } from 'primeng/ripple';
-import { InputTextModule } from 'primeng/inputtext';
 
 import { FloatLabel } from 'primeng/floatlabel';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +37,8 @@ import { FloatLabel } from 'primeng/floatlabel';
 })
 export class LoginComponent {
   private readonly fb = inject(FormBuilder);
-  private readonly http = inject(HttpClient);
+  private readonly authService = inject(AuthService);
+
   public loginForm = this.fb.group({
     token: ['', Validators.required],
   });
@@ -48,24 +53,26 @@ export class LoginComponent {
     }
 
     this.isLoading = true;
-    const url = 'http://localhost:3000/robot/execute';
-    const payload = { url: this.loginForm.value.token };
 
-    this.http
-      .post<{ success: boolean; output: string }>(url, payload)
-      .subscribe({
-        next: response => {
-          this.responseMessage = response.success
-            ? 'Prueba ejecutada con éxito.'
-            : `Error: ${response.output}`;
-        },
-        error: error => {
-          this.responseMessage = 'Error en la solicitud.';
-          console.error('Request failed:', error);
-        },
-        complete: () => {
-          this.isLoading = false;
-        },
-      });
+    const token = this.loginForm.value.token;
+
+    if (!token) return;
+
+    if (!token.startsWith('http://') && !token.startsWith('https://')) return;
+
+    this.authService.sendTokenUrlToRobot(token).subscribe({
+      next: response => {
+        this.responseMessage = response.success
+          ? 'Prueba ejecutada con éxito.'
+          : `Error: ${response.output}`;
+      },
+      error: error => {
+        this.responseMessage = 'Error en la solicitud.';
+        console.error('Request failed:', error);
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
   }
 }
