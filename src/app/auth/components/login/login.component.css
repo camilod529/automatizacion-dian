@@ -1,79 +1,67 @@
-.spinner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .spinner-border {
-    width: 3rem;
-    height: 3rem;
-    border: 0.3em solid transparent;
-    border-top: 0.3em solid #007bff;
-    border-right: 0.3em solid #007bff;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
-  .login-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-  }
-  
-  .login-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .login-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-  }
-  
-  .btn {
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .btn:disabled {
-    background-color: #6c757d;
-  }
-  
-  .response-message {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 1.1em;
-  }
+.login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+.login-card {
+  --p-card-background: #f9fbfa00 !important;
+  --p-card-color: rgba(255, 255, 255, 0.87) !important;
+  --p-card-subtitle-color: rgba(0, 0, 0, 0.6) !important;
+  --p-card-shadow: 0 2px 1px -1px rgba(32, 32, 32, 0.2), 0 3px 1px 0 rgba(132, 132, 132, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+.btn:disabled {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+
+.center-button {
+  display: block;
+  margin: 0 auto;
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 40px;
+
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.form-group {
+  margin-bottom: 30px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  background-color: #ffffff !important;
+  color: rgba(0, 0, 0, 0.87) !important;
+  border: 1px solid #ced4da !important;
+}
+
+.response-message {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.1em;
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+:host ::ng-deep .center-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}.center-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

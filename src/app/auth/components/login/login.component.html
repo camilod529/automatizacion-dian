@@ -1,18 +1,17 @@
 <div class="login-container">
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
-    <h2>Iniciar Sesión</h2>
-    <div class="form-group">
-      <label for="token">Token:</label>
-      <input id="token" formControlName="token" type="text" class="form-control" />
+  <p-card class="login-card">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <h2>Conectarse a la DIAN</h2>
+      <div class="form-group">
+        <p-floatlabel>
+          <input pInputText id="token" formControlName="token" class="form-control" autocomplete="off" />
+          <label for="over_label">Token</label>
+        </p-floatlabel>
+      </div>
+      <p-button label="Enviar" icon="pi pi-check" [loading]="isLoading" type="submit" class="center-button" />
+    </form>
+    <div *ngIf="!isLoading && responseMessage" class="response-message">
+      <p>{{ responseMessage }}</p>
     </div>
-    <button type="submit" [disabled]="isLoading" class="btn btn-primary">Enviar</button>
-  </form>
-
-  <div *ngIf="isLoading" class="spinner">
-    <div class="spinner-border" role="status"></div>
-  </div>
-
-  <div *ngIf="!isLoading && responseMessage" class="response-message">
-    <p>{{ responseMessage }}</p>
-  </div>
+  </p-card>
 </div>
