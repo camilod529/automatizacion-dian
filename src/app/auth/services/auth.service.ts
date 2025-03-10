@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { SendTokenUrlToRobotResponse } from '../interfaces/robot-response.interfaces';
 
 const API_URL = environment.apiUrl;
 
@@ -14,6 +15,6 @@ export class AuthService {
     const url = `${API_URL}/robot/execute`;
     const payload = { url: token };
 
-    return this.http.post<{ success: boolean; output: string }>(url, payload);
+    return this.http.post<SendTokenUrlToRobotResponse>(url, payload);
   }
 }

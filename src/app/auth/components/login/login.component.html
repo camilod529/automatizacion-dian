@@ -8,10 +8,10 @@
           <label for="over_label">Token</label>
         </p-floatlabel>
       </div>
-      <p-button label="Enviar" icon="pi pi-check" [loading]="isLoading" type="submit" class="center-button" />
+      <p-button label="Enviar" icon="pi pi-check" [loading]="isLoading()" type="submit" class="center-button" />
     </form>
-    <div *ngIf="!isLoading && responseMessage" class="response-message">
-      <p>{{ responseMessage }}</p>
+    <div *ngIf="!isLoading() && responseMessage()" class="response-message">
+      <p>{{ responseMessage() }}</p>
     </div>
   </p-card>
 </div>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
@@ -43,12 +43,12 @@ export class LoginComponent {
     token: ['', Validators.required],
   });
 
-  public responseMessage = '';
-  public isLoading = false;
+  public responseMessage = signal<string>('');
+  public isLoading = signal<boolean>(false);
 
   onSubmit() {
     if (this.loginForm.invalid) {
-      this.responseMessage = 'Por favor, ingrese un token válido.';
+      this.responseMessage.set('Por favor, ingrese un token válido.');
       return;
     }
 
@@ -58,20 +58,22 @@ export class LoginComponent {
 
     if (!token.startsWith('http://') && !token.startsWith('https://')) return;
 
-    this.isLoading = true;
+    this.isLoading.set(true);
 
     this.authService.sendTokenUrlToRobot(token).subscribe({
       next: response => {
-        this.responseMessage = response.success
-          ? 'Prueba ejecutada con éxito.'
-          : `Error: ${response.output}`;
+        this.responseMessage.set(
+          response.success
+            ? `Su Test Set ID es ${response.uuid}`
+            : `Error: ${response.errorMessage}`,
+        );
       },
       error: error => {
-        this.responseMessage = 'Error en la solicitud.';
+        this.responseMessage.set('Error en la solicitud.');
         console.error('Request failed:', error);
       },
       complete: () => {
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
     });
   }
